@@ -1,0 +1,3 @@
+backend/backend/secret.py
+backend/venv/
+backend/backend/__pycache__/
