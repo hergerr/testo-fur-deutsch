@@ -3,7 +3,7 @@
 ### Main requirements
 
 1. Checking for duplicate when adding new question
-2. Two categories: *Rection des Verbes* and *Vokabular*
+2. Two categories: *Rektion des Verbs* and *Vokabular*
 3. Mobile and web app
 4. Implementing amenities like combo boxes for choosing *Fallen* and *Artikeln*
 
@@ -44,3 +44,13 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
+### Planned tech stack
+
+- API
+  - Rest framework:  **Django Rest Framework**,
+  - DBMS - **Postgres**
+  - Docker
+- Mobile:
+  - React Native/Kotlin/Java/Flutter (not yet decided)
+- Web
+  - React
