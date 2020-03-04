@@ -1,3 +1,6 @@
 backend/backend/secret.py
 backend/venv/
 backend/backend/__pycache__/
+backend/__pycache__/
+backend/rest_api/__pycache__/
+backend/rest_api/migrations/__pycache__/

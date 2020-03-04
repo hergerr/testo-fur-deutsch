@@ -11,3 +11,36 @@
 
 1. Smart measuring level of mastery of each question set, and asking least mastered questions more frequently
 
+### Non dockerized app knowledge base:
+
+Install postgress related stuff, create database with YOUR OWN credential (then type then in *secret.py*, ignored credentials file)
+
+```bash
+sudo apt-get install postgresql
+sudo apt-get install python-psycopg2
+sudo apt-get install libpq-dev
+
+# create database in psql shell. Remember that postgres doesnt recognize case
+sudo -i -u postgres # switch user
+psql  # enter shell
+CREATE DATABASE checkerdb;
+CREATE USER checkerUser WITH PASSWORD 'password';
+ALTER ROLE checkerUser SET client_encoding TO 'utf8';
+ALTER ROLE checkerUser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE checkerUser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE checkerDB TO checkerUser;
+
+# if no venv create it. Then install requiremets
+# python3 -m venv venv
+
+pip3 install -r requirements.txt
+
+# run migrations in app root directory
+
+python3 manage.py migrate
+
+# try to run app
+
+python3 manage.py runserver
+```
+
