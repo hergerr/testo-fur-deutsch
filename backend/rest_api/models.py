@@ -7,14 +7,19 @@ class WordSet(models.Model):
     date_created = models.DateField()
     title = models.CharField(max_length=100)
     description = models.TextField()
-    last_success_rate = models.IntegerField()  # success rate in percents
+    last_success_rate = models.IntegerField(default=0)  # success rate in percents
+
+    def __str__(self):
+        return f"{self.title} Wortschatz"
 
 
 class Word(models.Model):
-    word_set = models.ForeignKey(WordSet, on_delete=models.CASCADE)
+    word_set = models.ForeignKey(WordSet, on_delete=models.CASCADE, null=False, blank=False)
     german_word = models.CharField(max_length=100)
     article = models.CharField(
         max_length=3,
+        null=True,
+        blank=True,
         choices=[
             ('der', 'der'),
             ('die', 'die'),
@@ -33,17 +38,23 @@ class Word(models.Model):
         ]
     )
 
+    def __str__(self):
+        return f"{self.german_word}"
+
 
 class VerbsRektionSet(models.Model):
     date_created = models.DateField()
     title = models.CharField(max_length=100)
     description = models.TextField()
-    last_success_rate = models.IntegerField()  # success rate in percents
+    last_success_rate = models.IntegerField(default=0)  # success rate in percents
+
+    def __str__(self):
+        return f"{self.title} Verbs Sammlung"
 
 
 class VerbRektion(models.Model):
     verbs_rektion_set = models.ForeignKey(
-        VerbsRektionSet, on_delete=models.CASCADE)
+    VerbsRektionSet, on_delete=models.CASCADE, null=False, blank=False)
     phrase = models.TextField()
     case = models.CharField(
         max_length=1,
@@ -56,3 +67,6 @@ class VerbRektion(models.Model):
     )
     translation = models.TextField()
     example = models.TextField()
+
+    def __str__(self):
+        return f"{self.phrase}"
