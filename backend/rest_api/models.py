@@ -49,7 +49,7 @@ class VerbsRektionSet(models.Model):
     last_success_rate = models.IntegerField(default=0)  # success rate in percents
 
     def __str__(self):
-        return f"{self.title} Verbs Sammlung"
+        return f"{self.title} Verben Sammlung"
 
 
 class VerbRektion(models.Model):
