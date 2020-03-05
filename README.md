@@ -11,6 +11,23 @@
 
 1. Smart measuring level of mastery of each question set, and asking least mastered questions more frequently
 
+
+
+### Dockerized app (current state)
+
+```bash
+docker-compose up
+
+# get into app container and run migrations
+docker exec -it testo-fur-deutsch_web_1 bash
+python3 backend/manage.py migrate
+
+# create superuser
+python3 backend/manage.py createsuperuser
+```
+
+
+
 ### Non dockerized app knowledge base:
 
 Install postgress related stuff, create database with YOUR OWN credential (then type then in *secret.py*, ignored credentials file)

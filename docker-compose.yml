@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_DB=testodb
+      - POSTGRES_USER=testo
+      - POSTGRES_PASSWORD=W4lepsze
+    volumes:
+      - data:/var/lib/postgresql/data/
+  web:
+    build: .
+    command: python3 backend/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+volumes:
+  data:
