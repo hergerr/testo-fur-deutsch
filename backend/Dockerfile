@@ -4,6 +4,6 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 RUN mkdir /code
 WORKDIR /code
-COPY backend/requirements.txt /code/
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
