@@ -5,9 +5,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('words', views.WordView)
-router.register('words_sets', views.WordSetView)
 router.register('verb_rektion', views.VerbsRektionView)
-router.register('verb_rektion_sets', views.VerbsRektionSetView)
+router.register('learning_sets', views.LearningSetView)
 
 urlpatterns = [
     path('', include(router.urls))

@@ -3,18 +3,27 @@ from django.db import models
 # Create your models here.
 
 
-class WordSet(models.Model):
+class LearningSet(models.Model):
     date_created = models.DateField()
     title = models.CharField(max_length=100)
     description = models.TextField()
-    last_success_rate = models.IntegerField(default=0)  # success rate in percents
+    last_success_rate = models.IntegerField(
+        default=0)  # success rate in percents
+    type_of_set = models.CharField(
+        max_length=30,
+        choices=[
+            ('verb_rektion', 'Verb Rektion'),
+            ('vocabulary', 'Wortshatz')
+        ]
+    )
 
     def __str__(self):
         return f"{self.title} Wortschatz"
 
 
 class Word(models.Model):
-    word_set = models.ForeignKey(WordSet, on_delete=models.CASCADE, null=False, blank=False)
+    learning_set = models.ForeignKey(
+        LearningSet, on_delete=models.CASCADE, null=False, blank=False, default=1)
     german_word = models.CharField(max_length=100)
     article = models.CharField(
         max_length=3,
@@ -42,19 +51,9 @@ class Word(models.Model):
         return f"{self.german_word}"
 
 
-class VerbsRektionSet(models.Model):
-    date_created = models.DateField()
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    last_success_rate = models.IntegerField(default=0)  # success rate in percents
-
-    def __str__(self):
-        return f"{self.title} Verben Sammlung"
-
-
 class VerbRektion(models.Model):
-    verbs_rektion_set = models.ForeignKey(
-    VerbsRektionSet, on_delete=models.CASCADE, null=False, blank=False)
+    learning_set = models.ForeignKey(
+        LearningSet, on_delete=models.CASCADE, null=False, blank=False, default=1)
     phrase = models.TextField()
     case = models.CharField(
         max_length=1,
