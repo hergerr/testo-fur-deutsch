@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from .models import VerbRektion, Word, LearningSet
+from .models import VerbRektion, Word, LearningSet, StateOfLearningSet, StateOfVerbRektion, StateOfWord
 from .serializers import VerbRektionSerializer, LearningSetSerializer, WordsSerializer
 
 

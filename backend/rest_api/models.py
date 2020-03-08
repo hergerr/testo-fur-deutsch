@@ -63,7 +63,7 @@ class Word(models.Model):
         return f"{self.german_word}"
 
 
-class state_of_word(models.Model):
+class StateOfWord(models.Model):
     state_of_set = models.ForeignKey(
         StateOfLearningSet, on_delete=models.CASCADE, null=False, blank=False)
     word = models.ForeignKey(
