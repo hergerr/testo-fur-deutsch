@@ -1,17 +1,13 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 from .models import VerbRektion, Word, LearningSet
 from .serializers import VerbRektionSerializer, LearningSetSerializer, WordsSerializer
 
 
-class WordView(viewsets.ModelViewSet):
-    queryset = Word.objects.all()
-    serializer_class = WordsSerializer
-
-class LearningSetView(viewsets.ModelViewSet):
-    queryset = LearningSet.objects.all()
-    serializer_class = LearningSetSerializer
-
-class VerbsRektionView(viewsets.ModelViewSet):
-    queryset = VerbRektion.objects.all()
-    serializer_class = VerbRektionSerializer
+@csrf_exempt
+def get_word_and_four_answers(request):
+    if request.method == 'GET':
+        questions = Word.objects.all()
+        serializer = WordsSerializer(questions, many=True)
+        return JsonResponse(serializer.data, safe=False)

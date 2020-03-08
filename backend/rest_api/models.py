@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,9 +22,20 @@ class LearningSet(models.Model):
         return f"{self.title} Wortschatz"
 
 
+class StateOfLearningSet(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=False, blank=False)
+    learning_set = models.ForeignKey(
+        LearningSet, on_delete=models.CASCADE, null=False, blank=False
+    )
+    number_of_obligaory_rounds = models.IntegerField(default=1)
+    percent_done = models.IntegerField(default=0)
+    corectness_rate = models.IntegerField(default=0)
+
+
 class Word(models.Model):
     learning_set = models.ForeignKey(
-        LearningSet, on_delete=models.CASCADE, null=False, blank=False, default=1)
+        LearningSet, on_delete=models.CASCADE, null=False, blank=False)
     german_word = models.CharField(max_length=100)
     article = models.CharField(
         max_length=3,
@@ -51,9 +63,18 @@ class Word(models.Model):
         return f"{self.german_word}"
 
 
+class state_of_word(models.Model):
+    state_of_set = models.ForeignKey(
+        StateOfLearningSet, on_delete=models.CASCADE, null=False, blank=False)
+    word = models.ForeignKey(
+        Word, on_delete=models.CASCADE, null=False, blank=False)
+    done = models.BooleanField(default=False)
+    number_of_correct_answers = models.IntegerField(default=0)
+
+
 class VerbRektion(models.Model):
     learning_set = models.ForeignKey(
-        LearningSet, on_delete=models.CASCADE, null=False, blank=False, default=1)
+        LearningSet, on_delete=models.CASCADE, null=False, blank=False)
     phrase = models.TextField()
     case = models.CharField(
         max_length=1,
@@ -70,4 +91,11 @@ class VerbRektion(models.Model):
     def __str__(self):
         return f"{self.phrase}"
 
-# TODO model for saving progress
+
+class StateOfVerbRektion(models.Model):
+    state_of_set = models.ForeignKey(
+        StateOfLearningSet, on_delete=models.CASCADE, null=False, blank=False)
+    verb_rektion = models.ForeignKey(
+        VerbRektion, on_delete=models.CASCADE, null=False, blank=False)
+    done = models.BooleanField(default=False)
+    number_of_correct_answers = models.IntegerField(default=0)
