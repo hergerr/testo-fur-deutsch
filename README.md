@@ -23,10 +23,10 @@ docker-compose up
 
 # get into app container and run migrations
 docker exec -it testo-fur-deutsch_web_1 bash
-python3 backend/manage.py migrate
+python3 manage.py migrate
 
 # create superuser
-python3 backend/manage.py createsuperuser
+python3 manage.py createsuperuser
 ```
 
 
