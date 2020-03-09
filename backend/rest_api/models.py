@@ -76,6 +76,7 @@ class VerbRektion(models.Model):
     learning_set = models.ForeignKey(
         LearningSet, on_delete=models.CASCADE, null=False, blank=False)
     phrase = models.TextField()
+    preposition = models.TextField(default='')
     case = models.CharField(
         max_length=1,
         choices=[

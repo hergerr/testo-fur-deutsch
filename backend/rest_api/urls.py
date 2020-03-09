@@ -3,5 +3,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('words/', views.get_word_and_four_answers),
+    path('words/', views.single_word),
+    path('all_words/', views.get_all_words)
 ]

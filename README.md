@@ -16,6 +16,9 @@
 ### Dockerized app (current state)
 
 ```bash
+# if you want to delete volumes
+docker-compose down -v
+
 docker-compose up
 
 # get into app container and run migrations

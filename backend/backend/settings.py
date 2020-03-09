@@ -106,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DEFAULTS = {
+    'UNICODE_JSON': True
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
