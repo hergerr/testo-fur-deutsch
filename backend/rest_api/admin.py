@@ -1,21 +1,16 @@
 from django.contrib import admin
-# from .models import WordSet, Word, VerbsRektionSet, VerbRektion
+from .models import Word, VerbRektion, LearningSet
 
 
-# class WordInline(admin.TabularInline):
-#     model = Word
+class WordInline(admin.TabularInline):
+    model = Word
 
 
-# class VerbRektionInline(admin.TabularInline):
-#     model = VerbRektion
+class VerbRektionInline(admin.TabularInline):
+    model = VerbRektion
 
 
-# class WordInlineAdmin(admin.ModelAdmin):
-#     inlines = [WordInline]
+class LearningSetInlineAdmin(admin.ModelAdmin):
+    inlines = [WordInline, VerbRektionInline]
 
-# class VerbRektionInlineAdmin(admin.ModelAdmin):
-#     inlines = [VerbRektionInline]
-
-# # Register your models here.
-# admin.site.register(WordSet, WordInlineAdmin)
-# admin.site.register(VerbsRektionSet, VerbRektionInlineAdmin)
+admin.site.register(LearningSet, LearningSetInlineAdmin)
