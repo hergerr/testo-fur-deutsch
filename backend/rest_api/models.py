@@ -23,8 +23,8 @@ class LearningSet(models.Model):
 
 
 class StateOfLearningSet(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=False, blank=False)
+    owner = models.ForeignKey(
+        'auth.User', on_delete=models.CASCADE, null=False, blank=False)
     learning_set = models.ForeignKey(
         LearningSet, on_delete=models.CASCADE, null=False, blank=False
     )
