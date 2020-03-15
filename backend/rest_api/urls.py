@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('words/', views.single_word),
-    path('all_words/', views.get_all_words)
+    path('all_words/', views.get_all_words),
+    path('users/', views.get_all_users)
 ]

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import VerbRektion, Word, LearningSet
+from .models import VerbRektion, Word, LearningSet, StateOfLearningSet
+from django.contrib.auth.models import User
 
 
 class LearningSetSerializer(serializers.ModelSerializer):
@@ -13,7 +14,16 @@ class WordSerializer(serializers.ModelSerializer):
         model = Word
         fields = ('id', 'learning_set', 'german_word', 'article', 'translation', 'part_of_speech')
 
+
 class VerbRektionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerbRektion
         fields = ('id', 'learning_set','phrase', 'case', 'translation', 'example')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    learning_sets_states = serializers.PrimaryKeyRelatedField(many=True, queryset=StateOfLearningSet.objects.all())
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'learning_sets_states']

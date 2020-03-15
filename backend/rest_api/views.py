@@ -1,8 +1,9 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 from rest_framework.parsers import JSONParser
 from .models import VerbRektion, Word, LearningSet, StateOfLearningSet, StateOfVerbRektion, StateOfWord
-from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSerializer
+from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSerializer, UserSerializer
 
 
 @csrf_exempt
@@ -44,3 +45,10 @@ def single_verb_rektion(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
+
+def get_all_users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False}, safe=False)
