@@ -32,6 +32,9 @@ class StateOfLearningSet(models.Model):
     percent_done = models.IntegerField(default=0)
     corectness_rate = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.owner}'s learning set on {self.learning_set}"
+
 
 class Word(models.Model):
     learning_set = models.ForeignKey(
@@ -71,6 +74,9 @@ class StateOfWord(models.Model):
     done = models.BooleanField(default=False)
     number_of_correct_answers = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"State of word {self.word} from learning set state {self.state_of_set}"
+
 
 class VerbRektion(models.Model):
     learning_set = models.ForeignKey(
@@ -100,3 +106,6 @@ class StateOfVerbRektion(models.Model):
         VerbRektion, on_delete=models.CASCADE, null=False, blank=False)
     done = models.BooleanField(default=False)
     number_of_correct_answers = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"State of {self.verb_rektion} from learning set state {self.state_of_set}"
