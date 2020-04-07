@@ -1,54 +1,32 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets
 from django.contrib.auth.models import User
 from rest_framework.parsers import JSONParser
 from .models import VerbRektion, Word, LearningSet, StateOfLearningSet, StateOfVerbRektion, StateOfWord
-from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSerializer, UserSerializer
+from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSerializer, UserSerializer, StateOfWordSerializer, StateOfLearningSetSerializer
 
 
-@csrf_exempt
-def single_word(request):
-    # get a random word
-    if request.method == 'GET':
-        questions = Word.objects.order_by('?').first()
-        serializer = WordSerializer(questions)
-        return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False}, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = WordSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class WordView(viewsets.ModelViewSet):
+    queryset = Word.objects.all()
+    serializer_class = WordSerializer
 
 
-def get_all_words(request):
-    if request.method == 'GET':
-        questions = Word.objects.all()
-        serializer = WordSerializer(questions, many=True)
-        return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False}, safe=False)
+class StateOfWordView(viewsets.ModelViewSet):
+    queryset = StateOfWord.objects.all()
+    serializer_class = StateOfWordSerializer
 
 
-
-def single_verb_rektion(request):
-    # get a random rektion verb
-    if request.method == 'GET':
-        questions = VerbRektion.objects.order_by('?').first()
-        serializer = VerbRektionSerializer(questions)
-        return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False}, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = VerbRektionSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class StateOfLearningSetView(viewsets.ModelViewSet):
+    queryset = StateOfLearningSet.objects.all()
+    serializer_class = StateOfLearningSetSerializer
 
 
-def get_all_users(request):
-    if request.method == 'GET':
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False}, safe=False)
+class LearningSetView(viewsets.ModelViewSet):
+    queryset = LearningSet.objects.all()
+    serializer_class = LearningSetSerializer
+
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
