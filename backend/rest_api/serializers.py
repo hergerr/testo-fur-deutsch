@@ -39,8 +39,7 @@ class VerbRektionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    learning_sets_states = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=StateOfLearningSet.objects.all())
+    learning_sets_states = serializers.PrimaryKeyRelatedField(many=True, queryset=StateOfLearningSet.objects.all())
 
     class Meta:
         model = User
