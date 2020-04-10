@@ -9,35 +9,30 @@ from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSeria
 
 
 class WordView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = Word.objects.all()
     serializer_class = WordSerializer
 
 
 class StateOfWordView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = StateOfWord.objects.all()
     serializer_class = StateOfWordSerializer
 
 
 class StateOfLearningSetView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = StateOfLearningSet.objects.all()
     serializer_class = StateOfLearningSetSerializer
 
 
 class LearningSetView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = LearningSet.objects.all()
     serializer_class = LearningSetSerializer
 
 
 class UserView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
