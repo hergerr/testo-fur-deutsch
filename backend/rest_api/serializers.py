@@ -3,35 +3,34 @@ from .models import VerbRektion, Word, LearningSet, StateOfLearningSet, StateOfW
 from django.contrib.auth.models import User
 
 
-class LearningSetSerializer(serializers.HyperlinkedModelSerializer):
+class LearningSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = LearningSet
-        fields = ('id', 'url', 'title', 'type_of_set',
+        fields = ('id', 'title', 'type_of_set',
                   'date_created', 'description', 'last_success_rate')
 
 
-class StateOfLearningSetSerializer(serializers.HyperlinkedModelSerializer):
+class StateOfLearningSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = StateOfLearningSet
-        fields = ('id', 'url', 'owner', 'learning_set',
-                  'number_of_obligaory_rounds', 'percent_done', 'corectness_rate')
+        fields = ('id', 'owner', 'learning_set', 'number_of_obligaory_rounds', 'percent_done', 'corectness_rate')
 
 
-class WordSerializer(serializers.HyperlinkedModelSerializer):
+class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
         fields = ('id', 'url', 'learning_set', 'german_word',
                   'article', 'translation', 'part_of_speech')
 
 
-class StateOfWordSerializer(serializers.HyperlinkedModelSerializer):
+class StateOfWordSerializer(serializers.ModelSerializer):
     class Meta:
         model = StateOfWord
         fields = ('id', 'url', 'state_of_set', 'word',
                   'done', 'number_of_correct_answers')
 
 
-class VerbRektionSerializer(serializers.HyperlinkedModelSerializer):
+class VerbRektionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerbRektion
         fields = ('id', 'url', 'learning_set', 'phrase',
@@ -39,7 +38,7 @@ class VerbRektionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    learning_sets_states = serializers.PrimaryKeyRelatedField(many=True, queryset=StateOfLearningSet.objects.all())
+    # learning_sets_states = serializers.PrimaryKeyRelatedField(many=True, queryset=StateOfLearningSet.objects.all())
 
     class Meta:
         model = User

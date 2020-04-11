@@ -74,3 +74,12 @@ python3 manage.py runserver
   - React Native/Kotlin/Java/Flutter (not yet decided)
 - Web
   - React
+
+### Curl wiki:
+- register: curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json'  localhost:8000/auth/users/
+- login: curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json' localhost:8000/api/auth/token/login/
+- get all words: curl -X GET localhost:8000/words/
+- get certain word: curl -X GET localhost:8000/words/1/
+- when view has limited visibility: curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' localhost:8000/words/1/
+- add learning set state: curl -X POST -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/get_my_views/
+- get certain user's learning states: curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_my_views/
