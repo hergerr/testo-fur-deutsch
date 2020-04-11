@@ -12,5 +12,5 @@ router.register('state_of_learning_set', views.StateOfLearningSetView)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('get_my_views/', views.user_learning_set_state)
+    path('user_learning_states/', views.user_learning_set_state),
 ]
