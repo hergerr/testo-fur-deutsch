@@ -13,4 +13,5 @@ router.register('state_of_learning_set', views.StateOfLearningSetView)
 urlpatterns = [
     path('', include(router.urls)),
     path('user_learning_states/', views.user_learning_set_state),
+    path('get_question/<int:state_of_learning_set_id>/', views.get_word_with_answer_options),
 ]

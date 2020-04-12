@@ -141,3 +141,9 @@ python3 manage.py runserver
   ```bash
   curl -X PUT -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
   ```
+
+- get question with 'not done' state of certain user, from given state of learning set
+  ```bash
+  curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
+  ```
+  

@@ -1,15 +1,11 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
-from rest_framework import viewsets, generics, status
+import random
+
+from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from .models import VerbRektion, Word, LearningSet, StateOfLearningSet, StateOfVerbRektion, StateOfWord
-from .serializers import VerbRektionSerializer, LearningSetSerializer, WordSerializer, UserSerializer, StateOfWordSerializer, StateOfLearningSetSerializer
-from .permissions import IsOwner
+from django.shortcuts import get_object_or_404, get_list_or_404
+from .models import *
+from .serializers import *
 
 
 class WordView(viewsets.ModelViewSet):
@@ -58,13 +54,22 @@ def user_learning_set_state(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     elif request.method == 'PUT':
-        state = get_object_or_404(StateOfLearningSet, id=data['id'], owner=data['owner'])
-        print(state.corectness_rate)
-        print(data)
+        state = get_object_or_404(
+            StateOfLearningSet, id=data['id'], owner=data['owner'])
         serializer = StateOfLearningSetSerializer(state, data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_word_with_answer_options(request, state_of_learning_set_id):
+    # tak wygląda join
+    word_states = get_list_or_404(StateOfWord, state_of_set=state_of_learning_set_id, state_of_set__owner=request.user.id)
+    word_state = random.choice(word_states)
+
+    serializer = StateOfWordSerializer(word_state)
+    return Response(serializer.data)
