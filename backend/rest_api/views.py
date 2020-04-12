@@ -4,6 +4,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404, get_list_or_404
+from django.db.models import Q
 from .models import *
 from .serializers import *
 
@@ -68,8 +69,27 @@ def user_learning_set_state(request):
 @api_view(['GET'])
 def get_word_with_answer_options(request, state_of_learning_set_id):
     # tak wygląda join
-    word_states = get_list_or_404(StateOfWord, state_of_set=state_of_learning_set_id, state_of_set__owner=request.user.id)
+    word_states = get_list_or_404(StateOfWord, done=False, state_of_set=state_of_learning_set_id, state_of_set__owner=request.user.id)
     word_state = random.choice(word_states)
 
-    serializer = StateOfWordSerializer(word_state)
-    return Response(serializer.data)
+    correct_word = word_state.word
+
+    part_of_speech = correct_word.part_of_speech
+
+    # excludowanie wybranego slowka
+    possible_answers = get_list_or_404(Word, ~Q(id = correct_word.id), part_of_speech=part_of_speech)
+    answers = random.sample(possible_answers, k=3)
+    answer_attributes = [a.translation for a in answers]
+
+    final_dict = {
+        "word_state_id": word_state.id,
+        "question": correct_word.german_word,
+        "corrent_answer": correct_word.translation,
+        "wrong_answers": answer_attributes,
+        "correct_answers": word_state.number_of_correct_answers
+    }
+
+    if correct_word.article:
+        final_dict['article'] = correct_word.article
+
+    return Response(final_dict, status=status.HTTP_200_OK)
