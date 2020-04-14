@@ -4,11 +4,13 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register('words', views.WordView)
-router.register('learning_sets', views.LearningSetView)
 router.register('users', views.UserView)
+router.register('words', views.WordView)
 router.register('words_states', views.StateOfWordView)
-router.register('state_of_learning_set', views.StateOfLearningSetView)
+router.register('verb_rektion', views.VerbRektionView)
+router.register('verb_rektion_states', views.StateOfVerbRektionView)
+router.register('learning_sets', views.LearningSetView)
+router.register('state_of_learning_sets', views.StateOfLearningSetView)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -147,3 +147,22 @@ python3 manage.py runserver
   curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
   ```
   
+
+### Scenarios
+
+  1. Choose learning state or create new one
+
+  ```bash
+  curl -X POST -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
+  ```
+  
+  2. While state of set is not 100% done:
+    1. While there is not done state of word:
+      1. Get question with answers:
+         ```bash
+        curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
+        ```
+      2. If question was answered correctly, update state_of_word
+        ```bash
+        curl -X PUT -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
+        ```

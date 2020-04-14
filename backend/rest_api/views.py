@@ -21,6 +21,17 @@ class StateOfWordView(viewsets.ModelViewSet):
     serializer_class = StateOfWordSerializer
 
 
+class VerbRektionView(viewsets.ModelViewSet):
+
+    queryset = VerbRektion.objects.all()
+    serializer_class = VerbRektionSerializer
+
+class StateOfVerbRektionView(viewsets.ModelViewSet):
+
+    queryset = StateOfVerbRektion.objects.all()
+    serializer_class = StateOfVerbRektionSerializer
+
+
 class StateOfLearningSetView(viewsets.ModelViewSet):
     queryset = StateOfLearningSet.objects.all()
     serializer_class = StateOfLearningSetSerializer
