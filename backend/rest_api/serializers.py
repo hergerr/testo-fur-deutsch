@@ -35,7 +35,7 @@ class VerbRektionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerbRektion
         fields = ('id', 'learning_set', 'phrase', 'preposition',
-                  'case', 'translation', 'example')
+                  'case', 'example', 'translation')
 
 
 class StateOfVerbRektionSerializer(serializers.ModelSerializer):

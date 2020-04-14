@@ -94,13 +94,32 @@ def get_word_with_answer_options(request, state_of_learning_set_id):
 
     final_dict = {
         "word_state_id": word_state.id,
+        "correct_answers": word_state.number_of_correct_answers,
         "question": correct_word.german_word,
         "corrent_answer": correct_word.translation,
         "wrong_answers": answer_attributes,
-        "correct_answers": word_state.number_of_correct_answers
     }
 
     if correct_word.article:
         final_dict['article'] = correct_word.article
+
+    return Response(final_dict, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_verb_rektion_question(request, state_of_learning_set_id):
+    verb_rektion_states = get_list_or_404(StateOfVerbRektion, done=False, state_of_set=state_of_learning_set_id, state_of_set__owner=request.user.id)
+    verb_rektion_state = random.choice(verb_rektion_states)
+
+    verb_rektion = verb_rektion_state.verb_rektion
+
+    final_dict = {
+        "verb_rection_state_id": verb_rektion_state.id,
+        "correct_answers": verb_rektion_state.number_of_correct_answers,
+        "phrase": verb_rektion.phrase,
+        "case": verb_rektion.case,
+        "translation": verb_rektion.translation,
+        "example": verb_rektion.example
+    }
 
     return Response(final_dict, status=status.HTTP_200_OK)

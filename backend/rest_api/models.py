@@ -19,7 +19,7 @@ class LearningSet(models.Model):
     )
 
     def __str__(self):
-        return f"{self.title} Wortschatz"
+        return f"{self.title}: {self.type_of_set} learning set"
 
 
 class StateOfLearningSet(models.Model):
@@ -96,7 +96,7 @@ class VerbRektion(models.Model):
     example = models.TextField()
 
     def __str__(self):
-        return f"{self.phrase}"
+        return f"{self.phrase} {self.preposition} + {self.case}"
 
 
 class StateOfVerbRektion(models.Model):

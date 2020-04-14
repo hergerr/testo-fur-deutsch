@@ -16,4 +16,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('user_learning_states/', views.user_learning_set_state),
     path('get_question/<int:state_of_learning_set_id>/', views.get_word_with_answer_options),
+    path('get_verb_rektion/<int:state_of_learning_set_id>/', views.get_verb_rektion_question),
 ]
