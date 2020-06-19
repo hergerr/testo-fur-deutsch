@@ -1,0 +1,17 @@
+
+.LearningSetBox-container{
+    color: #25292F;
+    border: 1px solid #C2C3C5;
+    padding: 5px 25px;
+    max-width: 300px;
+    color: inherit;
+    font-family: 'Lato', sans-serif;
+}
+
+.LearningSetBox-title-and-date, .LearningSetBox-progress {
+    text-align: center;
+}
+
+.LearningSetBox-container:hover{
+    border: 1px solid #1F7018;
+}
