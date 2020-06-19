@@ -1,0 +1,10 @@
+.WordBox-container {
+    background-color: #25292F;
+    border: 1px solid #C2C3C5;
+    width: 200px;
+}
+
+.WordBox-container p {
+    text-align: center;
+    font-size: 20px;
+}
