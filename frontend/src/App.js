@@ -1,18 +1,37 @@
-import React from 'react';
 import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import { HomePage } from './pages/home-page/home-page.component';
+// import { ThemeButton } from './components/theme-button/theme-button.component';
 
 function App() {
   return (
     <div className="App">
-      <h3>Bist du fertig um zu etwas neue lernen?</h3>
-      <h1>Wilkommen bei <b>testo-fur-deutsch</b></h1>
+    <p className="App-logo">LG</p>
+      <Router>
+        <div>
+          <nav className="App-nav">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+            </ul>
+          </nav>
 
-      <p>Was mochten sie jetz lernen?</p>
-
-      <button className="words">Wortschatz</button>
-      <button className="verbs">Verb Rektion</button>
-
-
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
