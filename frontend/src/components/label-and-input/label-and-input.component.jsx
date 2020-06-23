@@ -5,7 +5,7 @@ export const LabelAndInput = (props) => {
     return (
         <div className="label-and-input-wrapper">
             <p>{props.label}</p>
-            <input/>
+            <input value={props.value} onChange={props.onChange} />
         </div>
     )
 }
