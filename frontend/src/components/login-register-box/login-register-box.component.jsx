@@ -2,25 +2,29 @@ import "./login-register-box.styles.css"
 import { LabelAndInput } from "../label-and-input/label-and-input.component.jsx"
 import React from "react";
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+// https://dev.to/realabbas/how-to-secure-jwt-token-in-react-172a
+import Cookie from "js-cookie";
+
 
 class LoginRegisterBox extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { login: '', password: '', redirect: false};
+        this.state = { login: '', password: '', redirect: false };
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        
-        axios.post(`http://127.0.0.1:8000/api-token/`, { username: this.state.login, password: this.state.password })
-        .then(res => {
-            if (res.status === 200) {
-                this.setState({redirect: true})
-            }
-        })
 
+        axios.post(`http://127.0.0.1:8000/api-token/`, { username: this.state.login, password: this.state.password })
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState({ redirect: true });
+                    Cookie.set("token", res.data.access);
+                    console.log(res.data.access);
+                }
+            })
     }
 
     handleLoginChange = event => {
@@ -34,8 +38,8 @@ class LoginRegisterBox extends React.Component {
     render() {
         const redirect = this.state.redirect;
 
-        if (redirect){
-            return <Redirect to='/choose'/>
+        if (redirect) {
+            return <Redirect to='/choose' />
         }
 
         return (
