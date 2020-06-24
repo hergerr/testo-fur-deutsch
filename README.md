@@ -87,7 +87,7 @@ python3 manage.py runserver
 - login: 
 
   ```bash
-  curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json' localhost:8000/api/auth/token/login/
+  curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json' localhost:8000/api-token/
   ```
 
   

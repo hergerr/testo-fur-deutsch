@@ -51,7 +51,6 @@ class UserView(viewsets.ModelViewSet):
 
 @api_view(['GET', 'POST', 'PUT'])
 def user_learning_set_state(request):
-    permission_classes = IsOwner
     data = request.data
     data['owner'] = request.user.id
 
