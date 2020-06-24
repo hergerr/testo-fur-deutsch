@@ -1,22 +1,24 @@
 import "./login-register-box.styles.css"
 import { LabelAndInput } from "../label-and-input/label-and-input.component.jsx"
-import React from "react"
+import React from "react";
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 class LoginRegisterBox extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { login: '', password: '' };
+        this.state = { login: '', password: '', redirect: false};
     }
 
     handleSubmit = event => {
         event.preventDefault();
-
-        axios.post(`http://127.0.0.1:8000/lol/`, { username: this.state.login, password: this.state.password })
+        
+        axios.post(`http://127.0.0.1:8000/api-token/`, { username: this.state.login, password: this.state.password })
         .then(res => {
-          console.log(res);
-          console.log(res.data);
+            if (res.status === 200) {
+                this.setState({redirect: true})
+            }
         })
 
     }
@@ -30,6 +32,12 @@ class LoginRegisterBox extends React.Component {
     }
 
     render() {
+        const redirect = this.state.redirect;
+
+        if (redirect){
+            return <Redirect to='/choose'/>
+        }
+
         return (
             <form className="outer-box" onSubmit={this.handleSubmit}>
                 <div className="inner-box">

@@ -77,9 +77,8 @@ python3 manage.py runserver
 
 ### Curl wiki:
 - register: 
-<!-- TODO -->
   ```bash
-  curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json'  localhost:8000/auth/users/
+  # TODO
   ```
 
   
@@ -111,7 +110,7 @@ python3 manage.py runserver
 - when view has limited visibility:
 
   ```bash
-  curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' localhost:8000/words/1/
+  curl -X GET -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' localhost:8000/words/1/
   ```
 
   
@@ -119,7 +118,7 @@ python3 manage.py runserver
 - add learning set state for current user: 
 
   ```bash
-  curl -X POST -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
+  curl -X POST -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
   ```
 
   
@@ -127,24 +126,24 @@ python3 manage.py runserver
 - get certain user's learning states: 
 
   ```bash
-  curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
+  curl -X GET -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
   ```
 
 - update user's learning state
 
   ```bash
-  curl -X PUT -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"id": "8", "number_of_obligaory_rounds":"2", "learning_set": "2", "percent_done": "10", "corectness_rate": "9"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/ -v
+  curl -X PUT -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"id": "8", "number_of_obligaory_rounds":"2", "learning_set": "2", "percent_done": "10", "corectness_rate": "9"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/ -v
   ```
 
 - update word state:
 
   ```bash
-  curl -X PUT -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
+  curl -X PUT -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
   ```
 
 - get question with 'not done' state of certain user, from given state of learning set
   ```bash
-  curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
+  curl -X GET -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
   ```
   
 
@@ -153,21 +152,24 @@ python3 manage.py runserver
   1. Choose learning state or create new one
 
   ```bash
-  curl -X POST -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
+  curl -X POST -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"learning_set": "2", "number_of_obligaory_rounds":"20"}' -H 'Content-Type: application/json' localhost:8000/user_learning_states/
   ```
   
   2. While state of set is not 100% done:
     1. While there is not done state of word:
       1. Get question with answers:
          ```bash
-        curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
+        curl -X GET -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_question/6/
         ```
       2. If question was answered correctly, update state_of_word
         ```bash
-        curl -X PUT -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
+        curl -X PUT -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -d '{"state_of_set": "6", "word":"3", "done":"false", "number_of_correct_answers": "2"}' -H 'Content-Type: application/json' http://localhost:8000/words_states/1/
         ```
     
    Case when verb rektion is selected is very similar. Only diffrence is url for getting question. The only argument is learning set number
     ```bash
-    curl -X GET -H  'Authorization: Token 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_verb_rektion/8/
+    curl -X GET -H  'Authorization: Bearer 6e30a5d59cdde84208133b8e68ce6cad92f9e4f2' -H 'Content-Type: application/json' localhost:8000/get_verb_rektion/8/
     ```
+
+### TODO
+- cors shit
