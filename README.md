@@ -77,7 +77,7 @@ python3 manage.py runserver
 
 ### Curl wiki:
 - register: 
-
+<!-- TODO -->
   ```bash
   curl -X POST -d '{"username": "fred","password": "adminadmin"}' -H 'Content-Type: application/json'  localhost:8000/auth/users/
   ```

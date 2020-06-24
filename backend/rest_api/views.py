@@ -122,3 +122,10 @@ def get_verb_rektion_question(request, state_of_learning_set_id):
     }
 
     return Response(final_dict, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def lol(request):
+    print(request.headers)
+    print(request.data)
+    return Response({"hello": "world"}, status=status.HTTP_200_OK)

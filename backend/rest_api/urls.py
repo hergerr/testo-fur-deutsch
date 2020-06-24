@@ -21,6 +21,7 @@ urlpatterns = [
     path('api-token/', TokenObtainPairView.as_view()),
     path('api-token-refresh/', TokenRefreshView.as_view()),
     path('user_learning_states/', views.user_learning_set_state),
+    path('lol/', views.lol),
     path('get_question/<int:state_of_learning_set_id>/', views.get_word_with_answer_options),
     path('get_verb_rektion/<int:state_of_learning_set_id>/', views.get_verb_rektion_question),
 ]

@@ -1,6 +1,7 @@
 import "./login-register-box.styles.css"
 import { LabelAndInput } from "../label-and-input/label-and-input.component.jsx"
 import React from "react"
+import axios from 'axios';
 
 class LoginRegisterBox extends React.Component {
     constructor(props) {
@@ -11,16 +12,13 @@ class LoginRegisterBox extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        console.log(JSON.stringify({ username: this.state.login, password: this.state.password }))
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            mode: 'no-cors',
-            body: JSON.stringify({ username: this.state.login, password: this.state.password })
-        };
-        fetch('http://localhost:8000/api/auth/token/login/', requestOptions)
-            .then(response => console.log(response))
+        axios.post(`http://127.0.0.1:8000/lol/`, { username: this.state.login, password: this.state.password })
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+
     }
 
     handleLoginChange = event => {
